@@ -1,12 +1,11 @@
 import { useState } from 'react'
-import './App.css'
-import { Button } from "./style-components/style";
+import RutesApp from './routes/RutesApp';
 
 function App() {
 
   return (
-    <div className="bg-red-300">
-      <Button >Hola</Button>
+    <div>
+        <RutesApp />
     </div>
   )
 }
