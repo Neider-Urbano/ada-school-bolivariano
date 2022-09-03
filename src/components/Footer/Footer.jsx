@@ -62,9 +62,7 @@ const Footer = () => {
                         eum harum corrupti dicta, aliquam sequi voluptate quas.
                     </p>
                 </div>
-                <div className="text-center p-4" 
-                    // style="background-color: rgba(0, 0, 0, 0.2);"
-                    >
+                <div className="text-center p-4">
                     © 2021 Copyright:
                     <a className="text-white" href="https://tailwind-elements.com/">Tailwind Elements</a>
                 </div>

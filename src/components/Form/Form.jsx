@@ -1,73 +1,127 @@
-import React from 'react'
+import React,{useState, useEffect} from 'react'
+import dataCitys from "../../utilities/dataCitys.json"
+import {Label, Select,Input} from "../../style-components/Form/style"
 
-const Form = () => {
+const Form = ({setCreateBooking}) => {
+  const [dataBooking,setDataBooking]=useState({
+    source:"city",destiny:"city",date:"",time:"", numberofpassengers:""
+  })
+  const [error,setError]=useState("")
+  const fecha = new Date();
+
+  useEffect(()=>{
+    const hoy = parseFloat(fecha.getDate())<10?"0"+(fecha.getDate()+1):fecha.getDate()+1;
+    const mesActual = parseFloat(fecha.getMonth() + 1)<10?"0"+fecha.getMonth():fecha.getMonth(); 
+    const dataBookingCopy=dataBooking;
+    dataBookingCopy.date=fecha.getFullYear()+"-"+mesActual+"-"+hoy;
+    dataBookingCopy.time=(parseFloat(fecha.getHours())<10?"0"+fecha.getHours():fecha.getHours())+":"+(parseFloat(fecha.getMinutes())<10?"0"+fecha.getMinutes():fecha.getMinutes());
+    setDataBooking(dataBookingCopy)
+  })
+
+  const onChangeDataBooking=(e)=>{
+    var {name,value}=e.target;
+    setDataBooking(data=>({
+      ...data,[name]:value
+    }))
+    var error=validateFormBooking(name,value);
+    setError(error)
+  }
+
+  const validateFormBooking=(name,value)=>{
+    var error="";
+    if(value==="city" || value==="0"){
+      value="";
+    }
+    if(value===""){
+      error=name+" required"
+    }
+    return error;
+  }
+
+  const onSubmitCreate=(e)=>{
+    e.preventDefault();
+    var error=""
+    Object.keys(dataBooking).map((key)=>{
+      if(error.length<1){
+        error=validateFormBooking(key,dataBooking[key]);
+      }
+    })
+    setError(error)
+    if(error.length<1){
+      setCreateBooking(dataBooking);
+    }
+  }
+
   return (
-    <div class="block p-6 rounded-lg shadow-lg bg-white max-w-sm">
-  <form>
-    <div class="form-group mb-6">
-      <label for="exampleInputEmail1" class="form-label inline-block mb-2 text-gray-700">Email address</label>
-      <input type="email" class="form-control
-        block
-        w-full
-        px-3
-        py-1.5
-        text-base
-        font-normal
-        text-gray-700
-        bg-white bg-clip-padding
-        border border-solid border-gray-300
-        rounded
-        transition
-        ease-in-out
-        m-0
-        focus:text-gray-700 focus:bg-white focus:border-blue-600 focus:outline-none" id="exampleInputEmail1"
-        aria-describedby="emailHelp" placeholder="Enter email">
-      <small id="emailHelp" class="block mt-1 text-xs text-gray-600">We'll never share your email with anyone
-        else.</small>
+    <div className="block p-6 rounded-lg shadow-lg bg-white max-w-sm md:max-w-md">
+      <form onSubmit={(e)=>{onSubmitCreate(e)}}>
+        <div className="md:grid grid-cols-2 gap-4">
+          <div className="form-group mb-6">
+            <Label htmlFor="exampleInputSource">Source</Label>
+            <div className="flex justify-center">
+              <div className="mb-3 xl:w-96">
+                <Select className="form-select" defaultValue={dataBooking.source} name="source" aria-label="Default select example"
+                  onChange={(e)=>{
+                    onChangeDataBooking(e)
+                  }}>
+                    <option disabled value="city">City</option>
+                      {dataCitys[0].citys.map((city,key)=>{
+                        return <option value={city} key={key+1}>{city}</option>
+                      })}
+                </Select>
+              </div>
+            </div>
+          </div>
+          <div className="form-group mb-6">
+            <Label htmlFor="exampleInputDestiny">Destiny</Label>
+            <div className="flex justify-center">
+              <div className="mb-3 xl:w-96">
+                <Select className="form-select" defaultValue={dataBooking.destiny} name="destiny" aria-label="Default select example"
+                  onChange={(e)=>{
+                    onChangeDataBooking(e)
+                  }}  
+                >
+                  <option disabled value="city">City</option>
+                    {dataCitys[0].citys.map((city,key)=>{
+                      if(city!==dataBooking.source) return <option value={city} key={key+1}>{city}</option>
+                    })}
+                </Select>
+              </div>
+            </div>
+          </div>
+          <div className="form-group mb-6">
+            <Label htmlFor="exampleInputNumberOfPassengers">Number of passengers</Label>
+            <Input type="number" className="form-control" min="0" name="numberofpassengers" defaultValue={dataBooking.numberofpassengers} id="exampleInputNumberOfPassengers" placeholder="Number of Passengers"
+              onChange={(e)=>{
+                onChangeDataBooking(e)
+              }} 
+            />
+          </div>
+          <div className="form-group mb-6">
+            <Label htmlFor="exampleInputDate">Date</Label>
+            <Input type="date" className="form-control" defaultValue={dataBooking.date} name="date" id="exampleInputDate" placeholder="Date"
+              onChange={(e)=>{
+                onChangeDataBooking(e)
+              }} 
+            />
+          </div>
+          <div className="form-group mb-6">
+            <Label htmlFor="exampleInputTime">Time</Label>
+            <Input type="time"  defaultValue={dataBooking.time}  name="time"  id="exampleInputTime" placeholder="Time"
+              onChange={(e)=>{
+                onChangeDataBooking(e)
+              }} 
+            />
+          </div>
+        </div>
+        <div className="flex items-center">
+          <button type="submit" className=" px-6 py-2.5 bg-blue-600 text-white font-medium text-xs leading-tight uppercase rounded shadow-md hover:bg-blue-700 hover:shadow-lg focus:bg-blue-700 focus:shadow-lg focus:outline-none focus:ring-0 active:bg-blue-800 active:shadow-lg transition duration-150 ease-in-out">
+            Create
+          </button>
+          {error.length>0 &&<p className="text-red-500 ml-4">{error}</p>}
+        </div>
+      </form>
     </div>
-    <div class="form-group mb-6">
-      <label for="exampleInputPassword1" class="form-label inline-block mb-2 text-gray-700">Password</label>
-      <input type="password" class="form-control block
-        w-full
-        px-3
-        py-1.5
-        text-base
-        font-normal
-        text-gray-700
-        bg-white bg-clip-padding
-        border border-solid border-gray-300
-        rounded
-        transition
-        ease-in-out
-        m-0
-        focus:text-gray-700 focus:bg-white focus:border-blue-600 focus:outline-none" id="exampleInputPassword1"
-        placeholder="Password">
-    </div>
-    <div class="form-group form-check mb-6">
-      <input type="checkbox"
-        class="form-check-input appearance-none h-4 w-4 border border-gray-300 rounded-sm bg-white checked:bg-blue-600 checked:border-blue-600 focus:outline-none transition duration-200 mt-1 align-top bg-no-repeat bg-center bg-contain float-left mr-2 cursor-pointer"
-        id="exampleCheck1">
-      <label class="form-check-label inline-block text-gray-800" for="exampleCheck1">Check me out</label>
-    </div>
-    <button type="submit" class="
-      px-6
-      py-2.5
-      bg-blue-600
-      text-white
-      font-medium
-      text-xs
-      leading-tight
-      uppercase
-      rounded
-      shadow-md
-      hover:bg-blue-700 hover:shadow-lg
-      focus:bg-blue-700 focus:shadow-lg focus:outline-none focus:ring-0
-      active:bg-blue-800 active:shadow-lg
-      transition
-      duration-150
-      ease-in-out">Submit</button>
-  </form>
-</div>
   )
 }
 
