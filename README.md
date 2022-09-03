@@ -1,5 +1,5 @@
 <div>
-    <img style="width:270px" src="https://github.com/Neider-Urbano/ada-school-bolivariano/blob/main/src/assets/images/icono.png" alt="logo"/>
+    <img style="width:200px" src="https://github.com/Neider-Urbano/ada-school-bolivariano/blob/main/src/assets/images/icono.png" alt="logo"/>
 </div>
 
 # Proyecto ada-school | Bolivariano S.A.S
@@ -31,11 +31,10 @@ Una aplicación web en la cual se podra entre otras listar y reservar tiquetes d
 ## Screen Shot
 
 <div>
-    <img style="width:270px" src="https://raw.githubusercontent.com/Neider-Urbano/proyectoindividual/main/client/src/images/fondos/proyecto2.png" alt="screenshot0"/>
-    <img style="width:270px" src="https://raw.githubusercontent.com/Neider-Urbano/proyectoindividual/main/client/src/images/fondos/screnshot1.png" alt="screenshot1"/>
-    <img style="width:270px" src="https://raw.githubusercontent.com/Neider-Urbano/proyectoindividual/main/client/src/images/fondos/screnshot2.png" alt="screenshot2"/>
-    <img style="width:270px" src="https://raw.githubusercontent.com/Neider-Urbano/proyectoindividual/main/client/src/images/fondos/screnshot3.png" alt="screenshot3"/>
-    <img style="width:270px" src="https://raw.githubusercontent.com/Neider-Urbano/proyectoindividual/main/client/src/images/fondos/screnshot4.png" alt="screenshot4"/>
-    <img style="width:270px" src="https://raw.githubusercontent.com/Neider-Urbano/proyectoindividual/main/client/src/images/fondos/screnshot5.png" alt="screenshot5"/>
-    <img style="width:270px" src="https://raw.githubusercontent.com/Neider-Urbano/proyectoindividual/main/client/src/images/fondos/screnshot6.png" alt="screenshot6"/>
+    <img style="width:270px" src="https://github.com/Neider-Urbano/ada-school-bolivariano/blob/main/src/assets/images/screenshot6.png" alt="screenshot0"/>
+    <img style="width:270px" src="https://github.com/Neider-Urbano/ada-school-bolivariano/blob/main/src/assets/images/screenshot5.png" alt="screenshot1"/>
+    <img style="width:270px" src="https://github.com/Neider-Urbano/ada-school-bolivariano/blob/main/src/assets/images/screenshot4.png" alt="screenshot2"/>
+    <img style="width:270px" src="https://github.com/Neider-Urbano/ada-school-bolivariano/blob/main/src/assets/images/screenshot3.png" alt="screenshot3"/>
+    <img style="width:270px" src="https://github.com/Neider-Urbano/ada-school-bolivariano/blob/main/src/assets/images/screenshot2.png" alt="screenshot4"/>
+    <img style="width:270px" src="https://github.com/Neider-Urbano/ada-school-bolivariano/blob/main/src/assets/images/screenshot1.png" alt="screenshot5"/>
 </div>
