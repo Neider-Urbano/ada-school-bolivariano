@@ -2,6 +2,8 @@ import React,{useState, useEffect} from 'react'
 import dataCitys from "../../utilities/dataCitys.json"
 import {Label, Select,Input,DivForm,ButtonCreate } from "../../style-components/Form/style"
 import Snippers from "../../components/Snippers/Spinners"
+import {validateFormBooking} from "../../utilities/InputsValidaciones"
+import useForm from "../../hooks/FormHooks";
 
 const Form = ({setCreateBooking}) => {
   const [dataBooking,setDataBooking]=useState({
@@ -11,18 +13,7 @@ const Form = ({setCreateBooking}) => {
   const [error,setError]=useState("")
   const fecha = new Date();
 
-  useEffect(()=>{
-    const hoy = parseFloat(fecha.getDate())<10?"0"+(fecha.getDate()+1):fecha.getDate()+1;
-    const mesActual = parseFloat(fecha.getMonth() + 1)<10?"0"+fecha.getMonth():fecha.getMonth(); 
-    const dataBookingCopy=dataBooking;
-    dataBookingCopy.date=fecha.getFullYear()+"-"+mesActual+"-"+hoy;
-    dataBookingCopy.time=(parseFloat(fecha.getHours())<10?"0"+fecha.getHours():fecha.getHours())+":"+(parseFloat(fecha.getMinutes())<10?"0"+fecha.getMinutes():fecha.getMinutes());
-    dataBookingCopy.destiny="city";
-    dataBookingCopy.source="city";
-    dataBookingCopy.numberofpassengers="";
-    setDataBooking(dataBookingCopy)
-    setSnipper(false)
-  },[snipper])
+  useForm(fecha,dataBooking, setDataBooking, setSnipper, snipper);
 
   const onChangeDataBooking=(e)=>{
     var {name,value}=e.target;
@@ -31,17 +22,6 @@ const Form = ({setCreateBooking}) => {
     }))
     var error=validateFormBooking(name,value);
     setError(error)
-  }
-
-  const validateFormBooking=(name,value)=>{
-    var error="";
-    if(value==="city" || value==="0"){
-      value="";
-    }
-    if(value===""){
-      error=name+" required"
-    }
-    return error;
   }
 
   const onSubmitCreate=(e)=>{
