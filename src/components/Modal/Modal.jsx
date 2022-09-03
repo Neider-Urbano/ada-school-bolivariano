@@ -1,96 +1,85 @@
 import React,{useEffect,useState} from 'react'
 import {Label, Select,Input} from "../../style-components/Form/style"
+import {ButtonCerrar, DivModal,H3, ButtonAceptar} from "../../style-components/Modal/style"
+import { Button} from "../../style-components/Login/style"
+import dataCitys from "../../utilities/dataCitys.json"
 
-const Modal = () => {
+const Modal = ({idBooking,setModalTrue}) => {
     const dataBooking=JSON.parse(window.localStorage.getItem("bookings"))
-    const idBooking=window.localStorage.getItem("idbooking")
-    const [booking,setBooking]=useState()
+    const [booking,setBooking]=useState([])
+
     useEffect(()=>{
-        // var bookingExit=dataBooking.map((data)=>{
-        //     if(data.id===idBooking){
-        //         console.log(data)
-        //         return data
-        //     }
-        // })
-        // setBooking(bookingExit)
+        var bookingExit=dataBooking.filter((data)=>{
+            if(data.id===idBooking){
+                return data
+            }
+        })
+        setBooking(bookingExit)
     },[])
+
     return (
-        <div className="modal fade fixed top-0 left-0 hidden w-full h-full outline-none overflow-x-hidden overflow-y-auto" id="exampleModalCenter" tabIndex="-1" aria-labelledby="exampleModalCenterTitle" aria-modal="true" role="dialog">
-        <div className="modal-dialog modal-dialog-centered relative w-auto pointer-events-none">
-            <div className="modal-content border-none shadow-lg relative flex flex-col w-full pointer-events-auto bg-white bg-clip-padding rounded-md outline-none text-current">
-            <div className="modal-header flex flex-shrink-0 items-center justify-between p-4 border-b border-gray-200 rounded-t-md">
-                <h5 className="text-xl font-medium leading-normal text-gray-800" id="exampleModalScrollableLabel">
-                    Detail booking
-                </h5>
-                <button type="button"
-                className="btn-close box-content w-4 h-4 p-1 text-black border-none rounded-none opacity-50 focus:shadow-none focus:outline-none focus:opacity-100 hover:text-black hover:opacity-75 hover:no-underline"
-                data-bs-dismiss="modal" aria-label="Close"></button>
-            </div>
-            <div className="modal-body relative p-4">
-                <div className="md:grid grid-cols-2 gap-4">
-                    <div className="form-group mb-6">
-                        <Label htmlFor="exampleInputSource" onClick={()=>{console.log(booking)}}>Source</Label>
-                        <div className="flex justify-center">
-                            <div className="mb-3 xl:w-96" >
-                                {/* <Input value={booking.source} name="source" aria-label="Default select example"
-                                /> */}
+        <DivModal id="authentication-modal" tabindex="-1" aria-modal="true" role="dialog" className="h-modal">
+            {booking.length>0 && <div className="relative p-4 w-full max-w-md h-full md:h-auto">
+                    <div className="relative bg-white rounded-lg shadow dark:bg-gray-700 border border-gray-300">
+                        <ButtonCerrar type="button" data-modal-toggle="authentication-modal"
+                            onClick={()=>{setModalTrue(false)}}>
+                            <svg aria-hidden="true" className="w-5 h-5" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+                                <path fill-rule="evenodd" d="M4.293 4.293a1 1 0 011.414 0L10 8.586l4.293-4.293a1 1 0 111.414 1.414L11.414 10l4.293 4.293a1 1 0 01-1.414 1.414L10 11.414l-4.293 4.293a1 1 0 01-1.414-1.414L8.586 10 4.293 5.707a1 1 0 010-1.414z" clip-rule="evenodd"></path>
+                            </svg>
+                            <span className="sr-only">Close modal</span>
+                        </ButtonCerrar>
+                        <div className="py-6 px-6 lg:px-8">
+                            <H3>Detail Bookings</H3>
+                            <div>
+                                <div className="md:grid grid-cols-2 gap-4">
+                                    <div className="form-group mb-2">
+                                        <Label htmlFor="exampleInputSource">Source</Label>
+                                        <div className="flex justify-center">
+                                            <div className="mb-3 xl:w-96">
+                                                <Select className="form-select" defaultValue={booking[0].source} name="source" aria-label="Default select example" disabled>
+                                                    <option disabled value="city">City</option>
+                                                    {dataCitys[0].citys.map((city,key)=>{
+                                                        return <option value={city} key={key+1}>{city}</option>
+                                                    })}
+                                                </Select>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div className="form-group mb-2">
+                                        <Label htmlFor="exampleInputDestiny">Destiny</Label>
+                                        <div className="flex justify-center">
+                                            <div className="mb-3 xl:w-96">
+                                                <Select className="form-select" defaultValue={booking[0].destiny} name="destiny" aria-label="Default select example" disabled>
+                                                <option disabled value="city">City</option>
+                                                    {dataCitys[0].citys.map((city,key)=>{
+                                                    if(city!==dataBooking.source) return <option value={city} key={key+1}>{city}</option>
+                                                    })}
+                                                </Select>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div className="form-group mb-2">
+                                        <Label htmlFor="exampleInputNumberOfPassengers">Number of passengers</Label>
+                                        <Input type="number" className="form-control" min="0" name="numberofpassengers" defaultValue={booking[0].numberofpassengers} id="exampleInputNumberOfPassengers" placeholder="Number of Passengers" disabled/>
+                                    </div>
+                                    <div className="form-group mb-2">
+                                        <Label htmlFor="exampleInputDate">Date</Label>
+                                        <Input type="date" className="form-control" defaultValue={booking[0].date} name="date" id="exampleInputDate" placeholder="Date" disabled/>
+                                    </div>
+                                    <div className="form-group mb-2">
+                                        <Label htmlFor="exampleInputTime">Time</Label>
+                                        <Input type="time"  defaultValue={booking[0].time}  name="time"  id="exampleInputTime" placeholder="Time" disabled/>
+                                    </div>
+                                </div>
+                                <Button className="buttonLogin mt-10" onClick={()=>{setModalTrue(false)}}>
+                                    Aceptar
+                                </Button>
                             </div>
                         </div>
                     </div>
-                    {/* <div className="form-group mb-6">
-                        <Label htmlFor="exampleInputDestiny">Destiny</Label>
-                        <div className="flex justify-center">
-                        <div className="mb-3 xl:w-96">
-                            <Select defaultValue={dataBooking.destiny} name="destiny" aria-label="Default select example"
-                            onChange={(e)=>{
-                                onChangeDataBooking(e)
-                            }}  
-                            >
-                            <option disabled value="city">City</option>
-                                {dataCitys[0].citys.map((city,key)=>{
-                                if(city!==dataBooking.source) return <option value={city} key={key+1}>{city}</option>
-                                })}
-                            </Select>
-                        </div>
-                        </div>
-                    </div>
-                    <div className="form-group mb-6">
-                        <Label htmlFor="exampleInputNumberOfPassengers">Number of passengers</Label>
-                        <Input type="number" min="0" name="numberofpassengers" defaultValue={dataBooking.numberofpassengers} id="exampleInputNumberOfPassengers" placeholder="Number of Passengers"
-                        onChange={(e)=>{
-                            onChangeDataBooking(e)
-                        }} 
-                        />
-                    </div>
-                    <div className="form-group mb-6">
-                        <Label htmlFor="exampleInputDate">Date</Label>
-                        <Input type="date" defaultValue={dataBooking.date} name="date" id="exampleInputDate" placeholder="Date"
-                        onChange={(e)=>{
-                            onChangeDataBooking(e)
-                        }} 
-                        />
-                    </div>
-                    <div className="form-group mb-6">
-                        <Label htmlFor="exampleInputTime">Time</Label>
-                        <Input type="time"  defaultValue={dataBooking.time}  name="time"  id="exampleInputTime" placeholder="Time"
-                        onChange={(e)=>{
-                            onChangeDataBooking(e)
-                        }} 
-                        />
-                    </div> */}
                 </div>
-            </div>
-            <div
-                className="modal-footer flex flex-shrink-0 flex-wrap items-center justify-end p-4 border-t border-gray-200 rounded-b-md">
-                <button type="button"
-                className="inline-block px-6 py-2.5 bg-purple-600 text-white font-medium text-xs leading-tight uppercase rounded shadow-md hover:bg-purple-700 hover:shadow-lg focus:bg-purple-700 focus:shadow-lg focus:outline-none focus:ring-0 active:bg-purple-800 active:shadow-lg transition duration-150 ease-in-out"
-                data-bs-dismiss="modal">
-                Close
-                </button>
-            </div>
-            </div>
-        </div>
-        </div>
+        }
+        </DivModal>
     )
 }
 

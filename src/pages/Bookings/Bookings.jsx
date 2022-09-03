@@ -21,16 +21,14 @@ const Bookings = () => {
     return (
         <div>
             <Nav/>
-            <div className="flex items-center flex-col min-h-[400px] pt-[130px]">
-                <div>
-                </div>
-                <div className="border border-gray-300 text-center">
-                    <h1 className="font-bold mb-5 mt-2">List of reserves</h1>
-                    <Table 
-                        columns={columns} 
-                        dataRender={dataRender ? dataRender: []} 
-                        setRefreshChange={setRefreshChange}
-                    />
+            <div className="px-5 flex items-center justify-center flex-col md:flex-row  mb-10 min-h-[300px] pt-[130px]">
+                <Table 
+                    columns={columns} 
+                    dataRender={dataRender ? dataRender: []} 
+                    setRefreshChange={setRefreshChange}
+                />
+                <div className="mt-7 w-[80%] md:w-[50%] md:ml-10 md:mt-0 border border-gray-300 rounded-lg overflow-hidden shadow-md">
+                    <img src="https://oorainbowoo.tokyo/wp-content/uploads/2022/09/news_20220902200510-780x470.jpg" alt="" />
                 </div>
             </div>
             <Footer />

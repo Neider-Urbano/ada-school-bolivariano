@@ -2,6 +2,7 @@ import React, {useState, useEffect}from 'react'
 import Footer from '../../components/Footer/Footer';
 import Form from '../../components/Form/Form';
 import Nav from '../../components/NavBar/Navbar.jsx';
+import imagenBus from "../../assets/images/login.jpg"
 
 const Create = () => {
     const [dataRender,setDataRender]=useState("");
@@ -26,9 +27,11 @@ const Create = () => {
     return (
       <div>
           <Nav /> 
-          <div className="flex items-center justify-center flex-col mt-28 mb-10 min-h-[300px]">
-              <h1 className="font-bold mb-5">Create Booking</h1>
+          <div className="px-5 flex items-center justify-center flex-col md:flex-row mt-28 mb-10 min-h-[300px]">
               <Form setCreateBooking={setCreateBooking}/>
+              <div className="mt-7 w-[80%] md:w-[50%] md:ml-10 md:mt-0 border border-gray-300 rounded-lg overflow-hidden shadow-md">
+                <img src={imagenBus} alt="" />
+              </div>
           </div>
           <Footer />
       </div>
