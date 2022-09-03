@@ -3,25 +3,30 @@ import {useNavigate} from "react-router-dom"
 import {Section, Input, Button,ButtonDanger} from "../../style-components/Login/style"
 import "../../style-components/Login/style.css"
 import icono from '../../assets/images/icono.png';
-
+import Snippers from "../../components/Snippers/Spinners"
 
 const Login = () => {
     const navigate = useNavigate();
     const [dataUser, setDataUser]=useState("")
     const [error, setError]=useState("")
-    
+    const [snipper,setSnipper]=useState(false)
     const onChangeUserName=(e)=>{
         const {value,name}=e.target;
         setDataUser(value)
         setError(validateUserName(value))
     }
+
     const onClickLogin=()=>{
         setError(validateUserName(dataUser))
         if(error==="" && dataUser.length>0){
+            setSnipper(true);
             window.localStorage.setItem("dataUser", JSON.stringify({username:dataUser,contact:"", email:""}))
-            navigate("/bookings")
+            setTimeout(()=>{
+                navigate("/bookings")
+            },200) 
         }
     }
+
     const validateUserName=(value)=>{
         var error=""
         if(value==="" || value===0){
@@ -32,6 +37,7 @@ const Login = () => {
         }
         return error;
     }
+
     return (
         <Section>
             <div className="container py-12 px-6 h-full">
@@ -55,9 +61,8 @@ const Login = () => {
                                             </div>
                                             <div className="text-center pt-1 mb-12 pb-1">
                                                 <Button className="buttonLogin" data-mdb-ripple="true" data-mdb-ripple-color="light"
-                                                    onClick={()=>{onClickLogin()}}
-                                                >
-                                                    Log in
+                                                    onClick={()=>{onClickLogin()}}>
+                                                    {!snipper ? "Log in" : <Snippers />}
                                                 </Button>
                                                 <a className="text-gray-500" href="#!">Forgot password?</a>
                                             </div>
