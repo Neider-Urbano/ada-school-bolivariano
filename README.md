@@ -1,47 +1,30 @@
-# ada-school-bolivariano
-Proyecto challengue Front End para ada-school sobre una empresa de autobuses llamada Bolivariano
-![HenryLogo](https://d31uz8lwfmyn8g.cloudfront.net/Assets/logo-henry-white-lg.png)
+![HenryLogo](https://github.com/Neider-Urbano/ada-school-bolivariano/blob/main/src/assets/images/icono.png)
 
-![HenryLogo](https://d31uz8lwfmyn8g.cloudfront.net/Assets/logo-henry-white-lg.png)
+# Proyecto ada-school | Bolivariano S.A.S
+Proyecto challengue Front End para ada-school sobre una empresa de autobuses llamada Bolivariano S.A.S.
 
-# Individual Project - Henry Dogs
+## Requisitos:
+- Use las mejores prácticas de codificación.
+- Correcto modelado de datos para almacenar información de forma flexible.
+- Cree componentes y funciones reutilizables.
+- Arquitectura correcta para poder conectar servicios API en el futuro.
 
-<img height="200" src="./dog.png" />
+## ¿Qué es Bolivariano S.A.S?
 
-## Objetivos del Proyecto
-
-- Construir una App utlizando React, Redux, Node y Sequelize.
-- Afirmar y conectar los conceptos aprendidos en la carrera.
-- Aprender mejores prácticas.
-- Aprender y practicar el workflow de GIT.
-- Usar y practicar testing.
-
-## ¿Qué es Kira&Max?
-
-Una aplicación en la cual se podra ver distintas razas de perro junto con información relevante de las mismas utilizando la api externa [the dog api](https://thedogapi.com/) y a partir de ella poder, entre otras cosas:
-
-- Buscar perros
-- Filtrarlos / Ordenarlos
-- Agregar nuevos perros
-
+Una aplicación web en la cual se podra entre otras listar y reservar tiquetes de viaje de la empresa Bolivariano S.A.S.
 
 ## Frontend
-
 - React Js
 - Redux 
 - LESS
+- Tailwind css
 
-## Backend
+## Deploy
+- Vercel
+- Link: 
 
-- Postgresql
-- sequelize
-- Node Js
-
-## Testing
-
-- supertest
-- Mocha
-- Jest
+## Youtube video
+- Link: 
 
 ## Screen Shot
 
