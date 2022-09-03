@@ -12,15 +12,16 @@ const Form = ({setCreateBooking}) => {
   const [snipper,setSnipper]=useState(null)
   const [error,setError]=useState("")
   const fecha = new Date();
+  const [fechaActual, setFechaActual]=useState();
 
-  useForm(fecha,dataBooking, setDataBooking, setSnipper, snipper);
+  useForm(fecha,dataBooking, setDataBooking, setSnipper, snipper,setFechaActual);
 
   const onChangeDataBooking=(e)=>{
     var {name,value}=e.target;
     setDataBooking(data=>({
       ...data,[name]:value
     }))
-    var error=validateFormBooking(name,value);
+    var error=validateFormBooking(name,value,fechaActual);
     setError(error)
   }
 
@@ -29,7 +30,7 @@ const Form = ({setCreateBooking}) => {
     var error=""
     Object.keys(dataBooking).map((key)=>{
       if(error.length<1){
-        error=validateFormBooking(key,dataBooking[key]);
+        error=validateFormBooking(key,dataBooking[key],fechaActual);
       }
     })
     setError(error)

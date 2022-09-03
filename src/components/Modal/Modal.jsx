@@ -1,6 +1,6 @@
 import React,{useEffect,useState} from 'react'
 import {Label, Select,Input} from "../../style-components/Form/style"
-import {ButtonCerrar, DivModal,H3, ButtonAceptar} from "../../style-components/Modal/style"
+import {ButtonCerrar, DivModal,H3} from "../../style-components/Modal/style"
 import { Button} from "../../style-components/Login/style"
 import dataCitys from "../../utilities/dataCitys.json"
 import useFetch from "../../hooks/ModalHooks";

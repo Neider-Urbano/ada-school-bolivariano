@@ -1,6 +1,6 @@
 import { useState, useEffect } from "react";
 
-export default function useForm(fecha,dataBooking, setDataBooking, setSnipper, snipper) {
+export default function useForm(fecha,dataBooking, setDataBooking, setSnipper, snipper,setFechaActual) {
 
   async function getData() {
     const hoy = parseFloat(fecha.getDate())<10?"0"+(fecha.getDate()+1):fecha.getDate()+1;
@@ -11,6 +11,7 @@ export default function useForm(fecha,dataBooking, setDataBooking, setSnipper, s
     dataBookingCopy.destiny="city";
     dataBookingCopy.source="city";
     dataBookingCopy.numberofpassengers="";
+    setFechaActual(dataBookingCopy.date)
     setDataBooking(dataBookingCopy)
     setSnipper(false)
   }
