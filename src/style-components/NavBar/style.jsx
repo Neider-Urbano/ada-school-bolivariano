@@ -3,7 +3,7 @@ import tw from "twin.macro";
 
 
 export const Nav = styled.nav`
-    ${tw`relative w-full flex flex-wrap items-center justify-between py-4 bg-gray-100 text-gray-500 hover:text-gray-700 focus:text-gray-700 shadow-lg`};
+    ${tw`relative w-full flex flex-wrap items-center justify-between py-4 bg-gray-100 text-gray-500 hover:text-gray-700 focus:text-gray-700 shadow-md`};
 `;
 
 export const DivUno = styled.div`

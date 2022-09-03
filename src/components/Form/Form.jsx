@@ -1,11 +1,13 @@
 import React,{useState, useEffect} from 'react'
 import dataCitys from "../../utilities/dataCitys.json"
-import {Label, Select,Input} from "../../style-components/Form/style"
+import {Label, Select,Input,DivForm,ButtonCreate } from "../../style-components/Form/style"
+import Snippers from "../../components/Snippers/Spinners"
 
 const Form = ({setCreateBooking}) => {
   const [dataBooking,setDataBooking]=useState({
-    source:"city",destiny:"city",date:"",time:"", numberofpassengers:""
+    source:"",destiny:"",date:"",time:"", numberofpassengers:""
   })
+  const [snipper,setSnipper]=useState(null)
   const [error,setError]=useState("")
   const fecha = new Date();
 
@@ -15,8 +17,12 @@ const Form = ({setCreateBooking}) => {
     const dataBookingCopy=dataBooking;
     dataBookingCopy.date=fecha.getFullYear()+"-"+mesActual+"-"+hoy;
     dataBookingCopy.time=(parseFloat(fecha.getHours())<10?"0"+fecha.getHours():fecha.getHours())+":"+(parseFloat(fecha.getMinutes())<10?"0"+fecha.getMinutes():fecha.getMinutes());
+    dataBookingCopy.destiny="city";
+    dataBookingCopy.source="city";
+    dataBookingCopy.numberofpassengers="";
     setDataBooking(dataBookingCopy)
-  })
+    setSnipper(false)
+  },[snipper])
 
   const onChangeDataBooking=(e)=>{
     var {name,value}=e.target;
@@ -49,39 +55,36 @@ const Form = ({setCreateBooking}) => {
     setError(error)
     if(error.length<1){
       setCreateBooking(dataBooking);
+      setSnipper(true)
     }
   }
 
   return (
-    <div className="block p-6 rounded-lg shadow-lg bg-white max-w-sm md:max-w-md">
+    <DivForm>
+      <h1 className="font-bold mb-5 text-center">Create Booking</h1>
       <form onSubmit={(e)=>{onSubmitCreate(e)}}>
         <div className="md:grid grid-cols-2 gap-4">
-          <div className="form-group mb-6">
+          <div className="form-group mb-2">
             <Label htmlFor="exampleInputSource">Source</Label>
             <div className="flex justify-center">
               <div className="mb-3 xl:w-96">
-                <Select className="form-select" defaultValue={dataBooking.source} name="source" aria-label="Default select example"
-                  onChange={(e)=>{
-                    onChangeDataBooking(e)
-                  }}>
-                    <option disabled value="city">City</option>
-                      {dataCitys[0].citys.map((city,key)=>{
-                        return <option value={city} key={key+1}>{city}</option>
-                      })}
+                <Select className="form-select" value={dataBooking.source} name="source" aria-label="Default select example"
+                  onChange={(e)=>{onChangeDataBooking(e)}}>
+                  <option value="city">City</option>
+                    {dataCitys[0].citys.map((city,key)=>{
+                      return <option value={city} key={key+1}>{city}</option>
+                    })}
                 </Select>
               </div>
             </div>
           </div>
-          <div className="form-group mb-6">
+          <div className="form-group mb-2">
             <Label htmlFor="exampleInputDestiny">Destiny</Label>
             <div className="flex justify-center">
               <div className="mb-3 xl:w-96">
-                <Select className="form-select" defaultValue={dataBooking.destiny} name="destiny" aria-label="Default select example"
-                  onChange={(e)=>{
-                    onChangeDataBooking(e)
-                  }}  
-                >
-                  <option disabled value="city">City</option>
+                <Select className="form-select" value={dataBooking.destiny} name="destiny" aria-label="Default select example"
+                  onChange={(e)=>{onChangeDataBooking(e)}}>
+                  <option value="city">City</option>
                     {dataCitys[0].citys.map((city,key)=>{
                       if(city!==dataBooking.source) return <option value={city} key={key+1}>{city}</option>
                     })}
@@ -89,39 +92,33 @@ const Form = ({setCreateBooking}) => {
               </div>
             </div>
           </div>
-          <div className="form-group mb-6">
+          <div className="form-group mb-2">
             <Label htmlFor="exampleInputNumberOfPassengers">Number of passengers</Label>
-            <Input type="number" className="form-control" min="0" name="numberofpassengers" defaultValue={dataBooking.numberofpassengers} id="exampleInputNumberOfPassengers" placeholder="Number of Passengers"
-              onChange={(e)=>{
-                onChangeDataBooking(e)
-              }} 
+            <Input type="number" className="form-control" min="0" name="numberofpassengers" value={dataBooking.numberofpassengers} id="exampleInputNumberOfPassengers" placeholder="Number of Passengers"
+              onChange={(e)=>{onChangeDataBooking(e)}} 
             />
           </div>
-          <div className="form-group mb-6">
+          <div className="form-group mb-2">
             <Label htmlFor="exampleInputDate">Date</Label>
-            <Input type="date" className="form-control" defaultValue={dataBooking.date} name="date" id="exampleInputDate" placeholder="Date"
-              onChange={(e)=>{
-                onChangeDataBooking(e)
-              }} 
+            <Input type="date" className="form-control" value={dataBooking.date} name="date" id="exampleInputDate" placeholder="Date"
+              onChange={(e)=>{onChangeDataBooking(e)}} 
             />
           </div>
-          <div className="form-group mb-6">
+          <div className="form-group mb-2">
             <Label htmlFor="exampleInputTime">Time</Label>
-            <Input type="time"  defaultValue={dataBooking.time}  name="time"  id="exampleInputTime" placeholder="Time"
-              onChange={(e)=>{
-                onChangeDataBooking(e)
-              }} 
+            <Input type="time"  value={dataBooking.time}  name="time"  id="exampleInputTime" placeholder="Time"
+              onChange={(e)=>{onChangeDataBooking(e)}} 
             />
           </div>
         </div>
-        <div className="flex items-center">
-          <button type="submit" className=" px-6 py-2.5 bg-blue-600 text-white font-medium text-xs leading-tight uppercase rounded shadow-md hover:bg-blue-700 hover:shadow-lg focus:bg-blue-700 focus:shadow-lg focus:outline-none focus:ring-0 active:bg-blue-800 active:shadow-lg transition duration-150 ease-in-out">
-            Create
-          </button>
-          {error.length>0 &&<p className="text-red-500 ml-4">{error}</p>}
+        <div className="flex flex-col items-center justify-center mt-7">
+          {error.length>0 &&<p className="text-red-500 ml-4 mb-1">{error}</p>}
+          <ButtonCreate type="submit" className="buttonLogin">
+            {!snipper ? "Create" : <Snippers />}
+          </ButtonCreate>
         </div>
       </form>
-    </div>
+    </DivForm>
   )
 }
 
