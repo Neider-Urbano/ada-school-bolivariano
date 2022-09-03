@@ -1,4 +1,6 @@
-![HenryLogo](https://github.com/Neider-Urbano/ada-school-bolivariano/blob/main/src/assets/images/icono.png)
+<div>
+    <img style="width:270px" src="https://github.com/Neider-Urbano/ada-school-bolivariano/blob/main/src/assets/images/icono.png" alt="logo"/>
+</div>
 
 # Proyecto ada-school | Bolivariano S.A.S
 Proyecto challengue Front End para ada-school sobre una empresa de autobuses llamada Bolivariano S.A.S.
