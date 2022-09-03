@@ -18,15 +18,15 @@ export const Li = styled.li`
     ${tw`p-2`};
 `;
 
-export const A = styled.a`
+export const A = styled.div`
     ${tw`text-gray-500 hover:text-gray-700 focus:text-gray-700 p-0`};
 `;
 
-export const AAcount = styled.a`
+export const AAcount = styled.div`
     ${tw`text-sm py-2 px-4 font-normal block w-full whitespace-nowrap bg-transparent text-gray-700 hover:bg-gray-100`};
 `;
 
-export const AProfile = styled.a`
+export const AProfile = styled.div`
     ${tw`text-sm py-2 px-4 font-normal block w-full whitespace-nowrap bg-transparent text-gray-700 hover:bg-gray-100`};
 `;
 

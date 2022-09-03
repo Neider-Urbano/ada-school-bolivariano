@@ -1,4 +1,5 @@
 import React from 'react'
+import { Link } from 'react-router-dom';
 import {AAcount,AProfile} from "../../style-components/NavBar/style"
 
 
@@ -19,13 +20,13 @@ const OptionsAcount = ({dataUser}) => {
             </a>
             <ul className="dropdown-menu min-w-max absolute hidden bg-white text-base z-50 float-left py-2 list-none text-left rounded-lg shadow-lg mt-1 hidden m-0 bg-clip-padding border-none left-auto right-0 " aria-labelledby="dropdownMenuButton1">
                 <li>
-                    <AAcount className="dropdown-item" href="#">Action</AAcount>
+                    <AAcount className="dropdown-item">Action</AAcount>
                 </li>
                 <li>
-                    <AAcount className="dropdown-item" href="#">Another action</AAcount>
+                    <AAcount className="dropdown-item">Another action</AAcount>
                 </li>
                 <li>
-                    <AAcount className=" dropdown-item" href="#">Something else here</AAcount>
+                    <AAcount className=" dropdown-item">Something else here</AAcount>
                 </li>
             </ul>
         </div>
@@ -36,7 +37,11 @@ const OptionsAcount = ({dataUser}) => {
             </a>
             <ul className="dropdown-menu min-w-max absolute hidden bg-white text-base z-50 float-left py-2 list-none text-left rounded-lg shadow-lg mt-1 hidden m-0 bg-clip-padding border-none left-auto right-0" aria-labelledby="dropdownMenuButton2">
                 <li>
-                    <AProfile className="dropdown-item" href="#">Profile</AProfile>
+                    <AProfile className="dropdown-item">
+                        <Link to="/profile">
+                            Profile
+                        </Link>
+                    </AProfile>
                 </li>
                 <li>
                     <AProfile className="dropdown-item"  

@@ -9,13 +9,19 @@ export function validarLoginDos(value){
         return error;
 }
 
-export function validateFormBooking(name,value){
+export function validateFormBooking(name,value,fechaActual){
         var error="";
         if(value==="city" || value==="0"){
           value="";
         }
         if(value===""){
           error=name+" required"
+        }else{
+            if(name==="date"){
+                if(value<fechaActual){
+                    error=name+" invalid"
+                }
+            }
         }
         return error;
 }
