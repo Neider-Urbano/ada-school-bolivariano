@@ -3,27 +3,19 @@ import Footer from '../../components/Footer/Footer';
 import Form from '../../components/Form/Form';
 import Nav from '../../components/NavBar/Navbar.jsx';
 import imagenBus from "../../assets/images/login.jpg"
+import { useDispatch, useSelector } from "react-redux";
+import { postBooking } from "../../redux/actions/actions";
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
+import Notify from '../../utilities/notify';
 
 const Create = () => {
-    const [dataRender,setDataRender]=useState("");
-
-    useEffect(()=>{
-        setDataRender(JSON.parse(window.localStorage.getItem("bookings")))
-    },[])
-    
+    const dispatch = useDispatch();
     const setCreateBooking=(dataBooking)=>{
-      var idMax=0;
-      var newBooking=[];
-      dataRender?.map((data)=>{
-        if(parseFloat(data.id)>idMax){
-          idMax=parseFloat(data.id)
-        }
-        newBooking.push(data)
-      })
-      dataBooking.id=idMax+1+"";
-      newBooking.push(dataBooking);
-      window.localStorage.setItem("bookings",JSON.stringify(newBooking))
-    }
+      dispatch(postBooking(dataBooking))
+      Notify("Booking Created!",toast)
+    } 
+
     return (
       <div>
           <Nav /> 
@@ -33,6 +25,7 @@ const Create = () => {
                 <img src={imagenBus} alt="" />
               </div>
           </div>
+          <ToastContainer />
           <Footer />
       </div>
     )

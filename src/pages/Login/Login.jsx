@@ -4,20 +4,22 @@ import {Section, Input, Button,ButtonDanger} from "../../style-components/Login/
 import "../../style-components/Login/style.css"
 import icono from '../../assets/images/icono.png';
 import Snippers from "../../components/Snippers/Spinners"
+import  {validarLoginDos} from '../../utilities/InputsValidaciones';
 
 const Login = () => {
     const navigate = useNavigate();
     const [dataUser, setDataUser]=useState("")
     const [error, setError]=useState("")
     const [snipper,setSnipper]=useState(false)
+
     const onChangeUserName=(e)=>{
         const {value,name}=e.target;
         setDataUser(value)
-        setError(validateUserName(value))
+        setError(validarLoginDos(value))
     }
 
     const onClickLogin=()=>{
-        setError(validateUserName(dataUser))
+        setError(validarLoginDos(dataUser))
         if(error==="" && dataUser.length>0){
             setSnipper(true);
             window.localStorage.setItem("dataUser", JSON.stringify({username:dataUser,contact:"", email:""}))
@@ -25,17 +27,6 @@ const Login = () => {
                 navigate("/bookings")
             },200) 
         }
-    }
-
-    const validateUserName=(value)=>{
-        var error=""
-        if(value==="" || value===0){
-            error="username required"
-        }
-        if(value.length>15){
-            error="username too long"
-        }
-        return error;
     }
 
     return (
