@@ -2,6 +2,9 @@
     <img style="width:200px" src="https://github.com/Neider-Urbano/ada-school-bolivariano/blob/main/src/assets/images/icono.png" alt="logo"/>
 </div>
 
+## Youtube video
+- Link: https://youtu.be/A1fkaE_DDNk
+
 # Proyecto ada-school | Bolivariano S.A.S
 Proyecto challengue Front End para ada-school sobre una empresa de autobuses llamada Bolivariano S.A.S.
 
@@ -23,10 +26,8 @@ Una aplicación web en la cual se podra entre otras listar y reservar tiquetes d
 
 ## Deploy
 - Vercel
-- Link: 
+- Link: https://bolivarianosas.vercel.app/
 
-## Youtube video
-- Link: 
 
 ## Screen Shot
 
